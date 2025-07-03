@@ -212,6 +212,13 @@ func (p *Proxy) proxyHTTPRequest(
 		roundTripReq.Header.Set("Connection", "keep-alive")
 	}
 
+	roundTripReq.Header.Set("X-Real-IP", "")
+	roundTripReq.Header.Set("X-Forwarded-For", "")
+	roundTripReq.Header.Set("X-Forwarded-Proto", "")
+	roundTripReq.Header.Set("CF-Connecting-IP", "")
+	roundTripReq.Header.Set("CF-IPCountry", "")
+	roundTripReq.Header.Set("CF-Visitor", "")
+	roundTripReq.Header.Set("CF-Ray", "")
 	// Set the User-Agent as an empty string if not provided to avoid inserting golang default UA
 	if roundTripReq.Header.Get("User-Agent") == "" {
 		roundTripReq.Header.Set("User-Agent", "")
